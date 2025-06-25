@@ -1,6 +1,6 @@
 <template>
     <div class="">
-        Listing page
+        Register page
     </div>
 </template>
 
@@ -8,7 +8,7 @@
 
 export default{
 
-    name :'AddListing',
+    name :'RegisterPage'
 }
 
 </script>

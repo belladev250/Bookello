@@ -1,14 +1,14 @@
 <template>
     <div class="">
-        Listing page
+        Homepage
     </div>
 </template>
 
 <script>
 
-export default{
-
-    name :'AddListing',
+export default {
+    name:'HomePage',
 }
+
 
 </script>

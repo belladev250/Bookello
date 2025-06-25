@@ -1,14 +1,14 @@
 <template>
     <div class="">
-        Listing page
+        Login page
     </div>
 </template>
 
 <script>
 
-export default{
+export default {
 
-    name :'AddListing',
+    name :'LoginPage',
 }
 
 </script>
