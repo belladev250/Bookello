@@ -1,11 +1,16 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
-    "./index.html",
-    "./src/**/*.{vue,js,ts,jsx,tsx}",
+    './public/index.html',
+    './src/**/*.{vue,js,ts}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        navy: '#1F2D5C',
+        orange: '#FFA54C',
+      },
+    },
   },
   plugins: [],
 }
