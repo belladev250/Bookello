@@ -15,11 +15,13 @@
             }"
             @click="selectRole('guest')"
           >
-            <div
+            <div 
+
               class="absolute top-4 right-4 w-5 h-5 rounded-full border-2"
               :class="{
                 'bg-navy border-navy': selectedRole === 'guest',
                 'bg-white border-gray-300': selectedRole !== 'guest',
+          
               }"
             >
               <div
