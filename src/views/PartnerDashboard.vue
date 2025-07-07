@@ -1,5 +1,5 @@
 <template>
-  <div>Partner Dashboard</div>
+  <div>Partner  Dashboard</div>
 </template>
 
 <script>

@@ -94,6 +94,7 @@ function selectRole(role) {
 function proceedWithRole() {
   if (selectedRole.value) {
   router.push(`/register?role=${selectedRole.value}`)
+  
   }
 }
 

@@ -1,20 +1,16 @@
 <template>
     <div class="">
 
-        <RoleSelector/>
-        
+  <h1>Homepage</h1>        
     </div>
 </template>
 
 <script>
 
-import RoleSelector from '@/components/RoleSelector.vue';
 
 export default {
 
-    components:{
-        RoleSelector
-    }
+   
 }
 
 
