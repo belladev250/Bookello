@@ -5,6 +5,7 @@ import RegisterPage from '@/views/RegisterPage.vue';
 import PartnerDashboard from '@/views/PartnerDashboard.vue';
 import AddListing from '@/views/AddListing.vue';
 import GuestDashboard from '@/views/GuestDashboard.vue';
+import RoleSelector from '@/components/RoleSelector.vue';
 
 
 const routes =[
@@ -14,7 +15,8 @@ const routes =[
     {path:'/register',name:'RegisterPage',component:RegisterPage},
     {path:'/dashboard/partner',name :'PartnerDashboard',component:PartnerDashboard},
     {path:'/dashboard/partner/add',name:'AddListing',component:AddListing},
-    {path:'/dashboard/guest', name:'AddListing',component:GuestDashboard }
+    {path:'/dashboard/guest', name:'AddListing',component:GuestDashboard },
+    {path :'/role-selector', name:'RoleSelector', component:RoleSelector}
 ];
 
 const router = createRouter({

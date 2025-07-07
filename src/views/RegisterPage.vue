@@ -30,7 +30,7 @@
             </div>
           </div>
 
-          <button class="w-full bg-primary text-white py-2 rounded hover:bg-navy">Register</button>
+          <button class="w-full bg-primary text-white py-2 rounded bg-navy">Register</button>
         </form>
 
         <p class="text-sm mt-4 text-gray-500">
