@@ -40,7 +40,7 @@
             </router-link>
           </div>
         </div>
-      </div>
+      </div>d
     </section>
 
     <!-- FOOTER -->
