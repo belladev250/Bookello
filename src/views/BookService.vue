@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen flex items-center justify-center bg-gray-100 px-4">
     <div class="bg-white rounded-lg shadow-md p-8 max-w-xl w-full">
-      <h2 class="text-2xl font-semibold mb-4 text-blue-900">Book: {{ service?.name }}</h2>
+      <h2 class="text-2xl font-semibold mb-4 text-navy">Book: {{ service?.name }}</h2>
 
       <form @submit.prevent="submitBooking" class="space-y-4">
         <input v-model="form.name" required type="text" placeholder="Full Name" class="input" />
@@ -45,20 +45,29 @@ onMounted(async () => {
 })
 
 const submitBooking = async () => {
-  if (!service.value) return
+  if (!service.value) {
+    alert('Service details not loaded. Please wait a moment and try again.')
+    return
+  }
 
-  await addDoc(collection(db, 'bookings'), {
-    ...form.value,
-    serviceId: route.params.id,
-    serviceName: service.value.name,
-    serviceType: service.value.type,
-    createdAt: serverTimestamp(),
-    status: 'pending',
-  })
+  try {
+    await addDoc(collection(db, 'bookings'), {
+      ...form.value,
+      serviceId: route.params.id,
+      serviceName: service.value.name ?? 'Unnamed service',
+      serviceType: service.value.type ?? 'Unknown',
+      createdAt: serverTimestamp(),
+      status: 'pending',
+    })
 
-  alert('Booking request sent!')
-  router.push('/')
+    alert('Booking request sent!')
+    router.push('/')
+  } catch (error) {
+    console.error("Booking submission error:", error)
+    alert('Something went wrong. Please try again.')
+  }
 }
+
 </script>
 
 <style scoped>

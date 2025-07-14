@@ -15,8 +15,8 @@ const routes =[
     {path:'/login',name:'LoginPage',component:LoginPage},
     {path:'/register',name:'RegisterPage',component:RegisterPage},
     {path:'/dashboard/partner',name :'PartnerDashboard',component:PartnerDashboard },
-    {path:'/dashboard/partner/add',name:'AddListing',component:AddListing },
-    {path:'/dashboard/guest', name:'AddListing',component:GuestDashboard },
+    {path:'/dashboard/partner/add-service',name:'AddListing',component:AddListing },
+    {path:'/dashboard/guest', name:'GuestDashboard',component:GuestDashboard },
     {path :'/role-selector', name:'RoleSelector', component:RoleSelector },
     {path: '/book/:id', name: 'BookService',component:BookService }
 
@@ -27,5 +27,6 @@ const router = createRouter({
     history :createWebHistory(),
     routes,
 });
+
 
 export default router;

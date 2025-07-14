@@ -27,20 +27,42 @@
     <section class="py-12 px-4 max-w-6xl mx-auto">
       <h2 class="text-xl font-bold mb-6">Featured Listings</h2>
 
-      <div v-if="services.length === 0" class="text-gray-500">No listings available yet.</div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+  <div
+    v-for="item in services"
+    :key="item.id"
+    class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden"
+  >
+    <img
+      :src="item.image || 'https://picsum.photos/600/400'"
+      class="w-full h-52 object-cover"
+      alt="Listing image"
+    />
+    <div class="p-4 space-y-2">
+      <h3 class="text-xl font-bold text-gray-800">{{ item.title || item.name }}</h3>
+      <p class="text-gray-600 text-sm line-clamp-2">{{ item.description }}</p>
+      <div class="flex items-center text-sm text-gray-500">
+        <svg class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        {{ item.location || 'Location not specified' }}
+      </div>
+      <div class="flex justify-between items-center mt-3">
+        <span class="text-blue-600 font-bold text-base">{{ extractPrice(item.pricing) }}</span>
+        <router-link
+          :to="`/book/${item.id}`"
+          class="text-white bg-blue-600 hover:bg-blue-700 text-sm px-4 py-2 rounded"
+        >
+          Book Now
+        </router-link>
+      </div>
+    </div>
+  </div>
+</div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        <div v-for="item in services" :key="item.id" class="border rounded shadow-sm hover:shadow-lg transition">
-          <img :src="item.image || 'https://via.placeholder.com/400x250'" alt="preview" class="w-full h-48 object-cover rounded-t" />
-          <div class="p-4">
-            <h3 class="text-lg font-semibold">{{ item.name }}</h3>
-            <p class="text-sm text-gray-600">{{ item.description }}</p>
-            <router-link :to="`/book/${item.id}`" class="block mt-4 text-sm font-medium text-blue-600 hover:underline">
-              Book Now
-            </router-link>
-          </div>
-        </div>
-      </div>d
     </section>
 
     <!-- FOOTER -->
@@ -76,6 +98,15 @@ onMounted(async () => {
     console.error("Error fetching services:", error)
   }
 })
+
+const extractPrice = (pricing) => {
+  if (typeof pricing === 'string') {
+    const match = pricing.match(/\$?\d+/)
+    return match ? match[0] : '0'
+  }
+  return '0'
+}
+
 </script>
 
 <style scoped>
@@ -88,4 +119,12 @@ onMounted(async () => {
 .bg-primary-dark {
   background-color: #1f2575;
 }
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 </style>
