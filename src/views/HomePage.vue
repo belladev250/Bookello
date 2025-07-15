@@ -5,7 +5,7 @@
     <!-- HERO -->
     <section class="bg-gradient-to-r from-navy to-[#31c8ff] text-white text-center py-28 px-4">
       <h1 class="text-4xl font-extrabold mb-4">Explore. Book. Enjoy.</h1>
-      <p class="text-lg mb-6">Apartments, Tours, Chefs & More — all in one platform.</p>
+      <p class="text-lg mb-6">Accomodation, Tours, Chefs & More — all in one platform.</p>
       <router-link to="#services" class="bg-white text-primary font-semibold px-6 py-3 rounded shadow hover:scale-105 transition">
         Start Booking
       </router-link>
@@ -81,7 +81,7 @@ const services = ref([])
 
 
 const categories = [
-  { name: 'Apartments', emoji: '🏠' },
+  { name: 'Accomodation', emoji: '🏠' },
   { name: 'Tours', emoji: '🗺️' },
   { name: 'Boats', emoji: '🚤' },
   { name: 'Chefs', emoji: '👨‍🍳' },

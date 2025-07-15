@@ -29,13 +29,24 @@
       <textarea v-model="description" rows="4" class="w-full border rounded p-2" placeholder="100-300 words"></textarea>
     </div>
 
-    <!-- Dynamic Fields Based on Type -->
+    <!-- Dynamic Fields for Accommodation -->
     <div v-if="type === 'accommodation'" class="mt-6 space-y-4">
       <h2 class="text-lg font-semibold text-blue-800">Accommodation Details</h2>
 
+      <!-- Multiselect Amenities -->
       <div>
-        <label class="block mb-1 font-medium">Amenities (comma separated)</label>
-        <input v-model="amenities" class="w-full border rounded p-2" placeholder="e.g. Wi-Fi, Pool, Breakfast" />
+        <label class="block mb-1 font-medium">Select Amenities</label>
+        <Multiselect
+          v-model="amenities"
+          :options="groupedAmenities"
+          :multiple="true"
+          :group-values="'options'"
+          :group-label="'group'"
+          placeholder="Select amenities"
+          track-by="label"
+          label="label"
+          class="w-full"
+        />
       </div>
 
       <div>
@@ -54,6 +65,7 @@
       </div>
     </div>
 
+    <!-- Dynamic Fields for Tour -->
     <div v-if="type === 'tour'" class="mt-6 space-y-4">
       <h2 class="text-lg font-semibold text-blue-800">Tour Package Details</h2>
 
@@ -91,6 +103,8 @@ import { ref } from 'vue'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { db, auth } from '@/firebase'
 import { useRouter } from 'vue-router'
+import Multiselect from 'vue-multiselect'
+import 'vue-multiselect/dist/vue-multiselect.min.css'
 
 const router = useRouter()
 
@@ -99,13 +113,87 @@ const type = ref('')
 const title = ref('')
 const location = ref('')
 const description = ref('')
-const amenities = ref('')
+const amenities = ref([])
 const pricing = ref('')
 const availability = ref('')
 const mapLink = ref('')
 const itinerary = ref('')
 const includes = ref('')
 const loading = ref(false)
+
+// Grouped amenity options
+const groupedAmenities = [
+  {
+    group: '🛏️ Inside the Apartment',
+    options: [
+      { label: 'Fully furnished living room' },
+      { label: 'Smart TV with channels' },
+      { label: 'High-speed Wi-Fi' },
+      { label: 'Private balcony' },
+      { label: 'Premium bedding' },
+      { label: 'Closets and storage' },
+      { label: 'Workstation / laptop desk' },
+    ]
+  },
+  {
+    group: '🍽️ Kitchen',
+    options: [
+      { label: 'Fully equipped kitchen' },
+      { label: 'Refrigerator & freezer' },
+      { label: 'Microwave' },
+      { label: 'Electric stove & oven' },
+      { label: 'Electric kettle' },
+      { label: 'Cutlery, plates, glasses' },
+      { label: 'Dining table' },
+    ]
+  },
+  {
+    group: '🛁 Bathroom',
+    options: [
+      { label: 'Hot water shower' },
+      { label: 'Fresh towels' },
+      { label: 'Toiletries provided' },
+      { label: 'Mirror & storage cabinet' },
+    ]
+  },
+  {
+    group: '🧺 Cleaning & Laundry',
+    options: [
+      { label: 'Daily housekeeping' },
+      { label: 'Laundry service' },
+      { label: 'Iron & ironing board' },
+    ]
+  },
+  {
+    group: '🛡️ Safety & Security',
+    options: [
+      { label: '24/7 security guard' },
+      { label: 'CCTV cameras' },
+      { label: 'Gated compound' },
+      { label: 'Fire extinguisher' },
+      { label: 'First aid kit' },
+    ]
+  },
+  {
+    group: '🚗 Parking & Transport',
+    options: [
+      { label: 'Free private parking' },
+      { label: 'Airport pickup available' },
+      { label: 'Car rental help' },
+      { label: 'Safe moto-taxi access' },
+    ]
+  },
+  {
+    group: '🌿 Extra Features',
+    options: [
+      { label: 'Peaceful environment' },
+      { label: 'Scenic views' },
+      { label: 'Near shops & hospitals' },
+      { label: 'Family friendly' },
+      { label: 'Long-stay discounts' },
+    ]
+  }
+]
 
 const submit = async () => {
   loading.value = true
@@ -127,7 +215,7 @@ const submit = async () => {
     if (type.value === 'accommodation') {
       serviceData = {
         ...base,
-        amenities: amenities.value.split(',').map(a => a.trim()),
+        amenities: amenities.value.map(a => a.label),
         availability: availability.value,
         mapLink: mapLink.value,
       }
@@ -142,7 +230,6 @@ const submit = async () => {
     await addDoc(collection(db, 'services'), serviceData)
     alert('Service added successfully!')
     router.push('/dashboard/partner')
-    
   } catch (e) {
     console.error(e)
     alert('Error saving service')
