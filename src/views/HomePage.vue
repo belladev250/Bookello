@@ -34,12 +34,12 @@
     class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden"
   >
     <img
-      :src="item.image || 'https://picsum.photos/600/400'"
+    :src="item.images?.[0]"
       class="w-full h-52 object-cover"
       alt="Listing image"
     />
     <div class="p-4 space-y-2">
-      <h3 class="text-xl font-bold text-gray-800">{{ item.title || item.name }}</h3>
+      <h3 class="text-xl font-bold text-gray-800">{{ item.title }}</h3>
       <p class="text-gray-600 text-sm line-clamp-2">{{ item.description }}</p>
       <div class="flex items-center text-sm text-gray-500">
         <svg class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -51,7 +51,6 @@
         {{ item.location || 'Location not specified' }}
       </div>
       <div class="flex justify-between items-center mt-3">
-        <span class="text-blue-600 font-bold text-base"> ${{ extractPrice(item.pricing) }}</span>
         <router-link
           :to="`/book/${item.id}`"
           class="text-white bg-blue-600 hover:bg-blue-700 text-sm px-4 py-2 rounded"
@@ -83,9 +82,11 @@ const services = ref([])
 const categories = [
   { name: 'Accomodation', emoji: '🏠' },
   { name: 'Tours', emoji: '🗺️' },
-  { name: 'Boats', emoji: '🚤' },
+  { name: 'Car Rental', emoji: '🚗' },
   { name: 'Chefs', emoji: '👨‍🍳' },
   { name: 'Photographers', emoji: '📸' },
+  { name: 'Spa & Massage', emoji: '💆‍♀️' },
+  { name: 'Manpower & Household Services', emoji: '🛠️' },
  
 ]
 
@@ -99,13 +100,13 @@ onMounted(async () => {
   }
 })
 
-const extractPrice = (pricing) => {
-  if (typeof pricing === 'string') {
-    const match = pricing.match(/\$?\d+/)
-    return match ? match[0] : '0'
-  }
-  return '0'
-}
+// const extractPrice = (pricing) => {
+//   if (typeof pricing === 'string') {
+//     const match = pricing.match(/\$?\d+/)
+//     return match ? match[0] : '0'
+//   }
+//   return '0'
+// }
 
 </script>
 

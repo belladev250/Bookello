@@ -147,7 +147,7 @@
           >
             <div class="relative">
               <img 
-                :src="item.image || 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'" 
+                :src="item.images?.[0]"
                 class="w-full h-48 object-cover" 
                 alt="Service image"
               />
@@ -157,7 +157,7 @@
             </div>
             <div class="p-4">
               <div class="flex justify-between items-start">
-                <h3 class="text-lg font-bold text-gray-900">{{ item.name }}</h3>
+                <h3 class="text-lg font-bold text-gray-900">{{ item.title }}</h3>
                 <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">Active</span>
               </div>
               <div class="flex items-center mt-1 text-gray-600">
@@ -170,12 +170,12 @@
               <p class="text-sm text-gray-700 mt-2 line-clamp-2">{{ item.description || 'No description provided' }}</p>
               
               <div class="mt-4 flex justify-between items-center">
-                <div>
+                <!-- <div>
                   <span class="text-gray-900 font-bold">{{ item.pricing || '0' }}</span>
                   <span class="text-gray-500 text-sm"> / service</span>
-                </div>
+                </div> -->
                 <router-link 
-                  :to="`/provider/edit-service/${item.id}`" 
+                  :to="`/edit-listing/${item.id}`" 
                   class="text-blue-600 hover:text-blue-800 text-sm font-medium"
                 >
                   Edit

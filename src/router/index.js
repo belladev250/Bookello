@@ -7,6 +7,7 @@ import AddListing from '@/views/AddListing.vue';
 import GuestDashboard from '@/views/GuestDashboard.vue';
 import RoleSelector from '@/components/RoleSelector.vue';
 import BookService from '@/views/BookService.vue';
+import EditListing from '@/views/EditListing.vue';
 
 
 const routes =[
@@ -18,7 +19,10 @@ const routes =[
     {path:'/dashboard/partner/add-service',name:'AddListing',component:AddListing },
     {path:'/dashboard/guest', name:'GuestDashboard',component:GuestDashboard },
     {path :'/role-selector', name:'RoleSelector', component:RoleSelector },
-    {path: '/book/:id', name: 'BookService',component:BookService }
+    {path: '/book/:id', name: 'BookService',component:BookService },
+    { path: '/edit-listing/:id',  name: 'EditListing',component: EditListing },
+ 
+
 
 ];
 

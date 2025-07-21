@@ -9,6 +9,12 @@
         <option value="">-- Select --</option>
         <option value="accommodation">Accommodation</option>
         <option value="tour">Tour Package</option>
+        <option value="car rental">Car Rental</option>
+        <option value="chefs">Chefs</option>
+        <option value="spa">spa & massage</option>
+        <option value="manpower"> Manpower & Household Services</option>
+       
+
       </select>
     </div>
 
