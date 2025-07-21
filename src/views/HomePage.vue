@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white min-h-screen text-gray-800">
+  <div class="bg-gray-100 min-h-screen text-gray-800">
  <NavbarPage/>
 
     <!-- HERO -->
@@ -15,8 +15,8 @@
     <section id="services" class="py-16 px-4 max-w-6xl mx-auto">
       <h2 class="text-2xl font-bold text-center mb-10">Choose Your Experience</h2>
 
-      <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
-        <div v-for="cat in categories" :key="cat.name" class="text-center hover:shadow-md p-4 border rounded cursor-pointer transition">
+      <div class="  grid grid-cols-2 md:grid-cols-5 gap-6">
+        <div v-for="cat in categories" :key="cat.name" class="text-center bg-white hover:shadow-md p-4 border rounded cursor-pointer transition">
           <div class="text-5xl mb-3">{{ cat.emoji }}</div>
           <h3 class="text-lg font-semibold">{{ cat.name }}</h3>
         </div>
@@ -51,7 +51,7 @@
         {{ item.location || 'Location not specified' }}
       </div>
       <div class="flex justify-between items-center mt-3">
-        <span class="text-blue-600 font-bold text-base">{{ extractPrice(item.pricing) }}</span>
+        <span class="text-blue-600 font-bold text-base"> ${{ extractPrice(item.pricing) }}</span>
         <router-link
           :to="`/book/${item.id}`"
           class="text-white bg-blue-600 hover:bg-blue-700 text-sm px-4 py-2 rounded"
