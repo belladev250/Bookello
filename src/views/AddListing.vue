@@ -19,9 +19,10 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
       <div>
         <label class="block mb-1 font-medium">Title</label>
-        <input v-model="title" class="w-full border rounded p-2" placeholder="Service title" />
+        <input v-model="title" class="w-full border rounded p-2" placeholder="name" />
       </div>
 
      <!-- Location Fields -->
@@ -56,7 +57,7 @@
 <div>
   <label class="block mb-1 font-medium">Availability Dates</label>
   <Datepicker
-  v-model="selectedRange"
+  v-model="selectedRange" 
    range
   :format="'yyyy-MM-dd'"
   class="w-full border rounded p-2"
@@ -122,6 +123,8 @@
       </div>
     </div>
 
+
+    <!-- ???????????????????????????????? TOUT PACKAGE DETAILS ????????????????????????????????????????  -->
     <div v-if="type === 'tour'" class="mt-6 space-y-4">
       <h2 class="text-lg font-semibold text-blue-800">Tour Package Details</h2>
       <div>
@@ -137,6 +140,96 @@
         <textarea v-model="includes" rows="3" class="w-full border rounded p-2" placeholder="e.g. Includes: Transport, guide. Not included: tips, souvenirs"></textarea>
       </div>
     </div>
+
+
+    
+    <!-- ???????????????????????????????? CAR RENTALS  ????????????????????????????????????????-->
+
+<div v-if="type === 'car rental'" class="mt-6 space-y-4">
+  <h2 class="text-lg font-semibold text-blue-800">Car Owner Information</h2>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <label class="block mb-1 font-medium">Full Name</label>
+      <input v-model="carOwnerName" class="w-full border rounded p-2" placeholder="John Doe" />
+    </div>
+    <div>
+      <label class="block mb-1 font-medium">Email Address</label>
+      <input v-model="carOwnerEmail" class="w-full border rounded p-2" placeholder="john@example.com" />
+    </div>
+    <div>
+      <label class="block mb-1 font-medium">Phone Number (WhatsApp)</label>
+      <input v-model="carOwnerPhone" class="w-full border rounded p-2" placeholder="+250 78..." />
+    </div>
+    <div>
+      <label class="block mb-1 font-medium">Business Name</label>
+      <input v-model="carBusinessName" class="w-full border rounded p-2" placeholder="Bookello Cars" />
+    </div>
+    <div>
+      <label class="block mb-1 font-medium">City / Location</label>
+      <input v-model="carCity" class="w-full border rounded p-2" placeholder="Kigali" />
+    </div>
+  </div>
+
+  <h2 class="text-lg font-semibold text-blue-800 mt-6">Vehicle Details</h2>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div><label class="block mb-1 font-medium">Car Make & Model</label><input v-model="carModel" class="w-full border rounded p-2" /></div>
+    <div><label class="block mb-1 font-medium">Year of Manufacture</label><input v-model="carYear" class="w-full border rounded p-2" /></div>
+    <div><label class="block mb-1 font-medium">License Plate</label><input v-model="carPlate" class="w-full border rounded p-2" /></div>
+    <div>
+      <label class="block mb-1 font-medium">Transmission</label>
+      <select v-model="carTransmission" class="w-full border rounded p-2">
+        <option value="">-- Select --</option>
+        <option>Manual</option>
+        <option>Automatic</option>
+      </select>
+    </div>
+    <div>
+      <label class="block mb-1 font-medium">Fuel Type</label>
+      <select v-model="carFuel" class="w-full border rounded p-2">
+        <option value="">-- Select --</option>
+        <option>Petrol</option>
+        <option>Diesel</option>
+        <option>Hybrid</option>
+      </select>
+    </div>
+    <div><label class="block mb-1 font-medium">Seating Capacity</label><input v-model="carSeats" type="number" class="w-full border rounded p-2" /></div>
+    <div><label class="block mb-1 font-medium">Rental Price per Day (RWF/USD)</label><input v-model="carPrice" type="number" class="w-full border rounded p-2" /></div>
+  </div>
+
+  <div>
+    <label class="block mb-1 font-medium">Attach Car Photos (Max 6)</label>
+    <input type="file" accept="image/*" multiple @change="handleImageUpload" class="hidden" ref="fileInput" />
+    <button @click="fileInput.click()" class="bg-blue-600 text-white px-4 py-2 rounded">Upload Car Photos</button>
+    <div class="mt-4 grid grid-cols-2 md:grid-cols-3 gap-4">
+      <img v-for="(img,i) in previewImages" :key="i" :src="img" class="w-full h-32 object-cover rounded border" />
+    </div>
+  </div>
+
+  <h2 class="text-lg font-semibold text-blue-800 mt-6">Rental Terms & Availability</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <label class="block mb-1 font-medium">Available Days</label>
+      <Datepicker v-model="carAvailableDays" range :format="'yyyy-MM-dd'" class="w-full border rounded p-2" />
+    </div>
+    <div><label class="block mb-1 font-medium">Working Hours</label><input v-model="carWorkingHours" class="w-full border rounded p-2" placeholder="8 AM - 5 PM" /></div>
+    <div><label class="block mb-1 font-medium">Minimum Rental Period</label><input v-model="carMinPeriod" class="w-full border rounded p-2" placeholder="1 day" /></div>
+    <div>
+      <label class="block mb-1 font-medium">Available with Driver?</label>
+      <select v-model="carWithDriver" class="w-full border rounded p-2">
+        <option value="">-- Select --</option>
+        <option>Yes</option>
+        <option>No</option>
+      </select>
+    </div>
+    <div><label class="block mb-1 font-medium">Pick-up / Drop-off Locations</label><input v-model="carPickupDrop" class="w-full border rounded p-2" /></div>
+  </div>
+</div>
+
+
+
 
     <div class="mt-8">
       <button @click="submit" class="bg-navy text-white px-6 py-3 rounded hover:bg-blue-900 transition" :disabled="loading">
@@ -177,6 +270,28 @@ const includes = ref('')
 const loading = ref(false)
 const selectedRange = ref(null)
 const availabilityDates = ref([])
+
+
+const carOwnerName = ref('')
+const carOwnerEmail = ref('')
+const carOwnerPhone = ref('')
+const carBusinessName = ref('')
+const carCity = ref('')
+
+const carModel = ref('')
+const carYear = ref('')
+const carPlate = ref('')
+const carTransmission = ref('')
+const carFuel = ref('')
+const carSeats = ref('')
+const carPrice = ref('')
+
+const carAvailableDays = ref([])
+const carWorkingHours = ref('')
+const carMinPeriod = ref('')
+const carWithDriver = ref('')
+const carPickupDrop = ref('')
+
 
 
 
@@ -303,22 +418,66 @@ async function submit() {
   loading.value = true
   const user = auth.currentUser
   const base = { 
-  providerId: user.uid,
-  type: type.value,
-  title: title.value,
-  description: description.value, 
-  location: `${street.value}, ${city.value}, ${country.value}`,
-  createdAt: serverTimestamp(), images: imageUrls.value }
-  let serviceData = {}
-  if (type.value === 'accommodation') {
-    serviceData = { ...base, rooms: rooms.value.filter(r => r.name && r.price), amenities: amenities.value.map(a => a.label), availability: availabilityDates.value, mapLink: mapLink.value }
-  } else {
-    serviceData = { ...base, itinerary, includes, pricing }
+    providerId: user.uid,
+    type: type.value,
+    title: title.value,
+    description: description.value,
+    location: `${street.value}, ${city.value}, ${country.value}`,
+    createdAt: serverTimestamp(),
+    images: imageUrls.value
   }
+
+  let serviceData = {}
+
+  if (type.value === 'accommodation') {
+    serviceData = {
+      ...base,
+      rooms: rooms.value.filter(r => r.name && r.price),
+      amenities: amenities.value.map(a => a.label),
+      availability: availabilityDates.value,
+      mapLink: mapLink.value
+    }
+  } else if (type.value === 'tour') {
+    serviceData = {
+      ...base,
+      itinerary: itinerary.value,
+      includes: includes.value,
+      pricing: pricing.value
+    }
+  } else if (type.value === 'car rental') {
+    serviceData = {
+      ...base,
+      carOwner: {
+        name: carOwnerName.value,
+        email: carOwnerEmail.value,
+        phone: carOwnerPhone.value,
+        businessName: carBusinessName.value,
+        city: carCity.value,
+      },
+      carDetails: {
+        model: carModel.value,
+        year: carYear.value,
+        plate: carPlate.value,
+        transmission: carTransmission.value,
+        fuel: carFuel.value,
+        seats: carSeats.value,
+        pricePerDay: carPrice.value,
+      },
+      rentalTerms: {
+        availableDays: carAvailableDays.value,
+        workingHours: carWorkingHours.value,
+        minRentalPeriod: carMinPeriod.value,
+        withDriver: carWithDriver.value,
+        pickupDropOff: carPickupDrop.value,
+      }
+    }
+  }
+
   await addDoc(collection(db, 'services'), serviceData)
   router.push('/dashboard/partner')
   loading.value = false
 }
+
 </script>
 
 <style scoped>
